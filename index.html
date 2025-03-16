@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>البث المباشر</title>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
-                if (navigator.onLine) {
-                    window.location.replace("https://prolooka.github.io/TO/"); // التوجيه مباشرة إلى الرابط بعد التحقق
-                } else {
-                    document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ الرجاء تشغيل الإنترنت</h1>"; // إذا لم يكن هناك اتصال
-                }
-            }, 3000); // التحقق من الاتصال لمدة 3 ثواني فقط
-        });
+        window.onload = function() {
+            if (navigator.onLine) {
+                // ✅ التوجيه الفوري إذا كان الإنترنت متصلاً
+                window.location.href = "https://linksshortcut.com/TICNk/";
+            } else {
+                // ❌ عرض رسالة خطأ فقط (دون تكرار الفحص)
+                document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
+            }
+        };
     </script>
 </head>
 <body>
