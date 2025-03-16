@@ -13,19 +13,32 @@
 
     <h1>مشاهدة البث المباشر</h1>
     
-    <!-- ✅ رابط القناة محمي داخل iframe -->
-    <iframe id="stream" src="https://prolooka.github.io/TO/" width="600" height="400" allowfullscreen></iframe>
-    
+    <!-- ✅ مشغل البث (سيتم تحميله فقط إذا كان الإنترنت متصلاً) -->
+    <iframe id="stream" width="600" height="400" allowfullscreen></iframe>
+
     <p id="offlineMessage">❌ لا يمكنك المشاهدة الآن، تحقق من اتصالك بالإنترنت.</p>
 
     <script>
+        const stream = document.getElementById("stream");
+        const offlineMessage = document.getElementById("offlineMessage");
+        const streamURL = "https://prolooka.github.io/TO/"; // 🔹 رابط البث
+
         function checkInternet() {
-            if (!navigator.onLine) {
-                document.body.innerHTML = ""; // يمسح كل شيء عند انقطاع الإنترنت
+            if (navigator.onLine) {
+                // ✅ إذا كان الإنترنت متصل، شغل البث
+                stream.src = streamURL;
+                stream.style.display = "block";
+                offlineMessage.style.display = "none";
+            } else {
+                // ❌ إذا انقطع الإنترنت، أخفِ البث وأظهر رسالة
+                stream.src = "";
+                stream.style.display = "none";
+                offlineMessage.style.display = "block";
             }
         }
         
-        setInterval(checkInternet, 1000); // ✅ يفحص الإنترنت كل ثانية
+        // ✅ يفحص الاتصال كل ثانية ويحدث البث حسب الحاجة
+        setInterval(checkInternet, 1000);
     </script>
 
 </body>
