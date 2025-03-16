@@ -4,42 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>البث المباشر</title>
-    <style>
-        body { text-align: center; font-family: Arial, sans-serif; padding: 50px; }
-        #offlineMessage { display: none; color: red; font-size: 24px; }
-    </style>
-</head>
-<body>
-
-    <h1>مشاهدة البث المباشر</h1>
-    
-    <!-- ✅ مشغل البث (سيتم تحميله فقط إذا كان الإنترنت متصلاً) -->
-    <iframe id="stream" width="600" height="400" allowfullscreen></iframe>
-
-    <p id="offlineMessage">❌ لا يمكنك المشاهدة الآن، تحقق من اتصالك بالإنترنت.</p>
-
     <script>
-        const stream = document.getElementById("stream");
-        const offlineMessage = document.getElementById("offlineMessage");
-        const streamURL = "https://prolooka.github.io/TO/"; // 🔹 رابط البث
-
-        function checkInternet() {
+        function checkInternetAndRedirect() {
             if (navigator.onLine) {
-                // ✅ إذا كان الإنترنت متصل، شغل البث
-                stream.src = streamURL;
-                stream.style.display = "block";
-                offlineMessage.style.display = "none";
+                // ✅ إذا كان الإنترنت يعمل، يتم التوجيه مباشرةً إلى البث
+                window.location.href = "https://prolooka.github.io/TO/"; 
             } else {
-                // ❌ إذا انقطع الإنترنت، أخفِ البث وأظهر رسالة
-                stream.src = "";
-                stream.style.display = "none";
-                offlineMessage.style.display = "block";
+                // ❌ إذا كان الإنترنت مقطوعًا، تبقى الصفحة فارغة
+                document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
             }
         }
-        
-        // ✅ يفحص الاتصال كل ثانية ويحدث البث حسب الحاجة
-        setInterval(checkInternet, 1000);
-    </script>
 
+        // ✅ تنفيذ الفحص مباشرة عند تحميل الصفحة
+        checkInternetAndRedirect();
+
+        // ✅ إعادة الفحص كل 3 ثوانٍ للتوجيه فور عودة الإنترنت
+        setInterval(checkInternetAndRedirect, 3000);
+    </script>
+</head>
+<body>
 </body>
 </html>
