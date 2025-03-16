@@ -5,23 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>البث المباشر</title>
     <script>
-        function checkInternetAndRedirect() {
-            if (navigator.onLine) {
-                // ✅ إذا كان الإنترنت يعمل، يتم التوجيه مباشرةً إلى البث
-                window.location.href = "https://prolooka.github.io/TO/"; 
-            } else {
-                // ❌ إذا كان الإنترنت مقطوعًا، تبقى الصفحة فارغة
-                document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
-            }
+        function redirectToStream() {
+            let checkTimes = 0; // عدد مرات التحقق
+            let interval = setInterval(() => {
+                if (navigator.onLine) {
+                    checkTimes++;
+                    if (checkTimes >= 2) { // ✅ بعد التحقق مرتين (2 ثانية)
+                        clearInterval(interval);
+                        window.location.href = "https://prolooka.github.io/TO/"; // 🔹 توجيه فوري
+                    }
+                } else {
+                    clearInterval(interval);
+                    document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
+                }
+            }, 1000); // 🔄 يتحقق كل ثانية
         }
 
-        // ✅ تنفيذ الفحص مباشرة عند تحميل الصفحة
-        checkInternetAndRedirect();
-
-        // ✅ إعادة الفحص كل 3 ثوانٍ للتوجيه فور عودة الإنترنت
-        setInterval(checkInternetAndRedirect, 3000);
+        // ✅ يبدأ التحقق فور تحميل الصفحة
+        window.onload = redirectToStream;
     </script>
 </head>
 <body>
+    <h1 style="text-align:center;">جاري التحقق من الاتصال...</h1>
 </body>
 </html>
