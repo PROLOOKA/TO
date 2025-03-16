@@ -4,19 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>البث المباشر</title>
-    <script>
-        window.onload = function() {
-            if (navigator.onLine) {
-                // ✅ التوجيه الفوري إذا كان الإنترنت متصلاً
-                window.location.href = "https://linksshortcut.com/TICNk/";
-            } else {
-                // ❌ عرض رسالة خطأ فقط (دون تكرار الفحص)
-                document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
-            }
-        };
-    </script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; padding: 50px; }
+        #offlineMessage { display: none; color: red; font-size: 24px; }
+    </style>
 </head>
 <body>
-    <h1 style="text-align:center;">جاري التحقق من الاتصال...</h1>
+
+    <h1>مشاهدة البث المباشر</h1>
+    
+    <!-- ✅ مشغل البث (سيتم تحميله فقط إذا كان الإنترنت متصلاً) -->
+    <iframe id="stream" width="600" height="400" allowfullscreen></iframe>
+
+    <p id="offlineMessage">❌ لا يمكنك المشاهدة الآن، تحقق من اتصالك بالإنترنت.</p>
+
+    <script>
+        const stream = document.getElementById("stream");
+        const offlineMessage = document.getElementById("offlineMessage");
+        const streamURL = "https://linksshortcut.com/TICNk"; // 🔹 رابط البث
+
+        function checkInternet() {
+            if (navigator.onLine) {
+                // ✅ إذا كان الإنترنت متصل، شغل البث
+                stream.src = streamURL;
+                stream.style.display = "block";
+                offlineMessage.style.display = "none";
+            } else {
+                // ❌ إذا انقطع الإنترنت، أخفِ البث وأظهر رسالة
+                stream.src = "";
+                stream.style.display = "none";
+                offlineMessage.style.display = "block";
+            }
+        }
+        
+        // ✅ يفحص الاتصال كل ثانية ويحدث البث حسب الحاجة
+        setInterval(checkInternet, 1000);
+    </script>
+
 </body>
 </html>
