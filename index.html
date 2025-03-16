@@ -3,26 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التحقق من الإنترنت</title>
-    <script>
-        function checkInternet() {
-            // محاولة جلب ملف صغير من الإنترنت لاختبار الاتصال
-            fetch("https://www.google.com/favicon.ico", { mode: "no-cors" })
-                .then(() => {
-                    window.location.href = "https://linksshortcut.com/beintod1";
-                })
-                .catch(() => {
-                    document.body.innerHTML = "<h2 style='color:red;'>لا يوجد اتصال بالإنترنت!</h2>";
-                });
-        }
-
-        // تشغيل الفحص عند تحميل الصفحة
-        window.onload = () => {
-            setTimeout(checkInternet, 100); // يفحص خلال 0.1 ثانية
-        };
-    </script>
+    <title>البث المباشر</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; padding: 50px; }
+        #offlineMessage { display: none; color: red; font-size: 24px; }
+    </style>
 </head>
 <body>
-    <h2>جار تجهيز السيرفر.... ...</h2>
+
+    <h1>مشاهدة البث المباشر</h1>
+    
+    <!-- ✅ رابط القناة محمي داخل iframe -->
+    <iframe id="stream" src="https://prolooka.github.io/TO/" width="600" height="400" allowfullscreen></iframe>
+    
+    <p id="offlineMessage">❌ لا يمكنك المشاهدة الآن، تحقق من اتصالك بالإنترنت.</p>
+
+    <script>
+        function checkInternet() {
+            if (!navigator.onLine) {
+                document.body.innerHTML = ""; // يمسح كل شيء عند انقطاع الإنترنت
+            }
+        }
+        
+        setInterval(checkInternet, 1000); // ✅ يفحص الإنترنت كل ثانية
+    </script>
+
 </body>
 </html>
