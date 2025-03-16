@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>البث المباشر</title>
     <script>
-        window.onload = function() {
+        document.addEventListener("DOMContentLoaded", function() {
             if (navigator.onLine) {
-                // ✅ التوجيه الفوري إذا كان الإنترنت متصلاً
-                window.location.href = "https://prolooka.github.io/TO/";
+                window.location.replace("https://prolooka.github.io/TO/"); // ✅ توجيه فوري بدون تعليق
             } else {
-                // ❌ عرض رسالة خطأ فقط (دون تكرار الفحص)
                 document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
             }
-        };
+        });
     </script>
 </head>
 <body>
