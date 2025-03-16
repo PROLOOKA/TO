@@ -8,11 +8,11 @@
         document.addEventListener("DOMContentLoaded", function() {
             setTimeout(function() {
                 if (navigator.onLine) {
-                    window.location.replace("https://prolooka.github.io/TO/"); // توجيه فوري بعد ثانية واحدة
+                    window.location.replace("https://prolooka.github.io/TO/"); // التوجيه مباشرة إلى الرابط بعد التحقق
                 } else {
-                    document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
+                    document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ الرجاء تشغيل الإنترنت</h1>"; // إذا لم يكن هناك اتصال
                 }
-            }, 1000); // الانتظار لمدة ثانية واحدة فقط
+            }, 3000); // التحقق من الاتصال لمدة 3 ثواني فقط
         });
     </script>
 </head>
