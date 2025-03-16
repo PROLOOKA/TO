@@ -5,24 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>البث المباشر</title>
     <script>
-        function redirectToStream() {
-            let checkTimes = 0; // عدد مرات التحقق
-            let interval = setInterval(() => {
-                if (navigator.onLine) {
-                    checkTimes++;
-                    if (checkTimes >= 2) { // ✅ بعد التحقق مرتين (2 ثانية)
-                        clearInterval(interval);
-                        window.location.href = "https://prolooka.github.io/TO/"; // 🔹 توجيه فوري
-                    }
-                } else {
-                    clearInterval(interval);
-                    document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
-                }
-            }, 1000); // 🔄 يتحقق كل ثانية
-        }
-
-        // ✅ يبدأ التحقق فور تحميل الصفحة
-        window.onload = redirectToStream;
+        window.onload = function() {
+            if (navigator.onLine) {
+                // ✅ التوجيه الفوري إذا كان الإنترنت متصلاً
+                window.location.href = "https://prolooka.github.io/TO/";
+            } else {
+                // ❌ عرض رسالة خطأ فقط (دون تكرار الفحص)
+                document.body.innerHTML = "<h1 style='color:red; text-align:center;'>❌ تحقق من اتصالك بالإنترنت</h1>";
+            }
+        };
     </script>
 </head>
 <body>
